@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Lifestyle Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sustainable Lifestyle Tracker</h1>
+        <div class="tabs">
+            <button class="tablinks active" onclick="openTab('carbon')">Carbon Footprint</button>
+            <button class="tablinks" onclick="openTab('energy')">Energy Usage</button>
+            <button class="tablinks" onclick="openTab('water')">Water Usage</button>
+            <button class="tablinks" onclick="openTab('waste')">Waste Generation</button>
+            <!-- <button class="tablinks" onclick="openTab('summary')">Summary</button> -->
+        </div>
+        <div id="carbon" class="tabcontent">
+            <h2>Carbon Footprint</h2>
+            <div class="category">
+                <label for="carbon-activity">Activity:</label>
+                <select id="carbon-activity">
+                    <option value="driving">Driving</option>
+                    <option value="electricity">Electricity Usage</option>
+                    <option value="meals">Meals</option>
+                    <option value="public-transport">Public Transportation</option>
+                    <option value="biking">Biking</option>
+                    <option value="walking">Walking</option>
+                    <option value="air-travel">Air Travel</option>
+                </select>
+                <button id="drivingBtn">Add Activity</button>
+                <div class="progress-bar" id="carbon-progress-container">
+                    <div class="progress" id="carbon-progress" title="Current Carbon Footprint: 0"></div>
+                </div>
+                
+                <p>Current Carbon Footprint: <span id="currentCarbonFootprint">0</span></p>
+            </div>
+        </div>
+        <div id="energy" class="tabcontent">
+            <h2>Energy Usage</h2>
+            <div class="category">
+                <label for="energy-usage">Usage (kWh):</label>
+                <input type="number" id="energy-usage">
+                <button onclick="updateEnergyUsage()">Add Usage</button>
+                <p>Total Energy Usage: <span id="totalEnergyUsage">0</span> kWh</p>
+            </div>
+        </div>
+        <div id="water" class="tabcontent">
+            <h2>Water Usage</h2>
+            <div class="category">
+                <label for="water-usage">Usage (Liters):</label>
+                <input type="number" id="water-usage">
+                <button onclick="updateWaterUsage()">Add Usage</button>
+                <p>Total Water Usage: <span id="totalWaterUsage">0</span> Liters</p>
+            </div>
+        </div>
+        <div id="waste" class="tabcontent">
+            <h2>Waste Generation</h2>
+            <div class="category">
+                <label for="waste-generation">Generation (kg):</label>
+                <input type="number" id="waste-generation">
+                <button onclick="updateWasteGeneration()">Add Generation</button>
+                <p>Total Waste Generated: <span id="totalWasteGeneration">0</span> kg</p>
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h2>Recommendations</h2>
+            <ul id="carbon-recommendations"></ul>
+        </div>
+        <div id="summary">
+            <h2>Summary</h2>
+            <div class="category">
+                <p>Total Activities: <span id="totalActivities">0</span></p>
+                <p>Total Carbon Footprint: <span id="totalCarbonFootprint">0</span></p>
+                <p>Total Energy Usage: <span id="totalEnergyUsage">0</span> kWh</p>
+                <p>Total Water Usage: <span id="totalWaterUsage">0</span> Liters</p>
+                <p>Total Waste Generated: <span id="totalWasteGeneration">0</span> kg</p>
+                <button onclick="clearData()">Clear Data</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
