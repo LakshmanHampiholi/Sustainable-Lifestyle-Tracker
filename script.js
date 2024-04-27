@@ -1,25 +1,20 @@
-// Get the default tab (Carbon Footprint) and show its content by default
 document.getElementById("carbon").style.display = "block";
 
 function openTab(tabName) {
-    // Hide all tab content
     const tabs = document.getElementsByClassName("tabcontent");
     for (let i = 0; i < tabs.length; i++) {
         tabs[i].style.display = "none";
     }
     
-    // Deactivate all tab links
     const tabLinks = document.getElementsByClassName("tablinks");
     for (let i = 0; i < tabLinks.length; i++) {
         tabLinks[i].classList.remove("active");
     }
 
-    // Show the clicked tab content and activate its link
     document.getElementById(tabName).style.display = "block";
     event.currentTarget.classList.add("active");
 }
 
-// Set the default tab (Carbon Footprint) as active
 document.querySelector(".tablinks.active").click();
 
 
@@ -33,7 +28,6 @@ var modal = document.getElementById("drivingModal");
 var drivingBtn = document.getElementById("drivingBtn");
 var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks the button, open the modal 
 drivingBtn.onclick = function() {
     addCarbonFootprint('driving');
 }
@@ -78,12 +72,10 @@ function addCarbonFootprint(activity) {
     document.getElementById('currentCarbonFootprint').innerText = totalCarbonFootprint.toFixed(2); // Update UI
 }
 
-// Function to handle adding energy usage
 function updateEnergyUsage() {
     const energyInput = document.getElementById('energy-usage').value;
     const energyUsage = parseFloat(energyInput);
     
-    // Check if energyUsage is a valid number
     if (!isNaN(energyUsage) && energyUsage >= 0) {
         totalEnergyUsage += energyUsage;
         console.log('Total energy usage:', totalEnergyUsage);
@@ -92,12 +84,10 @@ function updateEnergyUsage() {
         updateSummary();
     } else {
         console.log('Invalid energy usage value:', energyInput);
-        // You can add some error handling or display a message to the user here
     }
 }
 
 
-// Function to handle adding water usage
 function updateWaterUsage() {
     const waterUsage = parseFloat(document.getElementById('water-usage').value);
     totalWaterUsage += waterUsage;
@@ -107,7 +97,6 @@ function updateWaterUsage() {
     updateSummary();
 }
 
-// Function to handle adding waste generation
 function updateWasteGeneration() {
     const wasteGeneration = parseFloat(document.getElementById('waste-generation').value);
     totalWasteGeneration += wasteGeneration;
@@ -117,25 +106,20 @@ function updateWasteGeneration() {
     updateSummary();
 }
 
-// Close the modal when the user clicks on the close button
 span.onclick = function() {
     modal.style.display = "none";
 }
 
-// Close the modal when the user clicks anywhere outside of it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
 
-// Function to update recommendations based on carbon footprint
 function updateRecommendations(totalCarbonFootprint) {
-    // Clear previous recommendations
     const recommendationsList = document.getElementById('carbon-recommendations');
     recommendationsList.innerHTML = '';
 
-    // Add recommendations based on carbon footprint
     if (totalCarbonFootprint > 0.5) {
         addRecommendation("Consider carpooling or using public transportation.");
     }
@@ -152,25 +136,20 @@ function updateRecommendations(totalCarbonFootprint) {
     }
 }
 
-// Function to add recommendation to the list
 function addRecommendation(recommendation) {
     const li = document.createElement('li');
     li.textContent = recommendation;
     document.getElementById('carbon-recommendations').appendChild(li);
 }
 
-// Function to update the progress bar
 function updateProgress(totalCarbonFootprint) {
     const progress = document.getElementById('carbon-progress');
     const progressContainer = document.getElementById('carbon-progress-container');
 
-    // Clamp the totalCarbonFootprint to a maximum of 2 and a minimum of 0
     const clampedFootprint = Math.min(Math.max(totalCarbonFootprint, 0), 2);
 
-    // Set custom property for animation calculation
     progressContainer.style.setProperty('--current-carbon-footprint', clampedFootprint);
 
-    // Determine the level of carbon footprint for color coding
     let progressClass = 'low';
     if (clampedFootprint > 1.0) {
         progressClass = 'moderate';
@@ -180,30 +159,23 @@ function updateProgress(totalCarbonFootprint) {
     }
     progress.className = `progress ${progressClass}`;
 
-    // Update the tooltip text
     progressContainer.title = `Current Carbon Footprint: ${clampedFootprint}`;
 }
 
 
-// Function to update the summary section
 function updateSummary() {
     document.getElementById('totalActivities').innerText = totalActivities;
     document.getElementById('totalCarbonFootprint').innerText = totalCarbonFootprint.toFixed(2);
-    // Update other summary values here if needed
 }
 
-// Function to update the progress bar
 function updateProgress(totalCarbonFootprint) {
     const progress = document.getElementById('carbon-progress');
     const progressContainer = document.getElementById('carbon-progress-container');
 
-    // Clamp the totalCarbonFootprint to a maximum of 2
     const clampedFootprint = Math.min(totalCarbonFootprint, 2);
 
-    // Set custom property for animation calculation
     progressContainer.style.setProperty('--current-carbon-footprint', clampedFootprint);
 
-    // Determine the level of carbon footprint for color coding
     let progressClass = 'low';
     if (clampedFootprint > 1.0) {
         progressClass = 'moderate';
@@ -213,13 +185,11 @@ function updateProgress(totalCarbonFootprint) {
     }
     progress.className = `progress ${progressClass}`;
 
-    // Update the tooltip text
     progressContainer.title = `Current Carbon Footprint: ${clampedFootprint}`;
 }
 
 
 
-// Function to clear all data
 function clearData() {
     totalCarbonFootprint = 0;
     totalEnergyUsage = 0;
